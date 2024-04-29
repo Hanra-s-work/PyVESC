@@ -56,8 +56,9 @@ setuptools.setup(
     version=VERSION,
     packages=setuptools.find_packages(),
     install_requires=[
-        'pythoncrc==1.21',
-        'crccheck>=0.6'
+        'pyserial==3.5',
+        'crccheck>=0.6',
+        'pythoncrc==1.21'
     ],
     author="Henry Letellier",
     author_email="henrysoftwarehouse@protonmail.com",
