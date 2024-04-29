@@ -1,4 +1,5 @@
 # PyVESC [![Build Status](https://travis-ci.org/LiamBindle/PyVESC.svg?branch=master)](https://travis-ci.org/LiamBindle/PyVESC) [![Documentation Status](https://readthedocs.org/projects/pyvesc/badge/?version=latest)](http://pyvesc.readthedocs.io/en/latest/?badge=latest)
+
 PyVESC is aimed at being a easy to use and robust python implementation of the
 communication protocol used by the
 [VESC - Open Source ESC](http://vedder.se/2015/01/vesc-open-source-esc/) by
@@ -14,6 +15,7 @@ Pythons standard
 [struct](https://docs.python.org/3.5/library/struct.html)
 module is great for almost exaclty this. PyVESC's usefulness comes from the fact
 that PyVESC is:
+
 - Well tested
 - Robust in handling corrupt packets in a buffer
 - Messages are easily extensible so that PyVESC can be used as a generic
@@ -23,12 +25,15 @@ that PyVESC is:
   development
 
 ## Documentation
+
 For the latest version of PyVESC's documentation [Read The Docs](http://pyvesc.readthedocs.io/en/latest/)
 
 ## Contributing
+
 Obviously this is just a quick and dirty project; however, if you have any ideas,
 critiques or changes just let me know or submit a pull request.
 
 ## License
+
 Just like VESC, PyVESC is distributed under a
 [Creative Commons ShareALike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
