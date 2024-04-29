@@ -14,5 +14,6 @@ class PyvescFix:
     """ The pyvesc class rebind """
 
     def __init__(self) -> None:
+        self.version = "1.0.0"
         self.protocol = PO
         self.vesc = VE
