@@ -18,7 +18,8 @@ class TestPacket(TestCase):
         test_payload = bytes(random.getrandbits(8) for i in range(length))
         # test framing
         packet = vesc_packet.frame(test_payload)
-        self.assertEqual(len(packet), correct_payload_index + length + 3, "size of packet")
+        self.assertEqual(len(packet), correct_payload_index +
+                         length + 3, "size of packet")
         buffer = bytearray(packet)
         # test Parser
         parsed, consumed = vesc_packet.unframe(buffer)
@@ -50,8 +51,10 @@ class TestPacket(TestCase):
         # test framing
         packet1 = vesc_packet.frame(test_payload1)
         packet2 = vesc_packet.frame(test_payload2)
-        self.assertEqual(len(packet1), correct_payload_index1 + length1 + 3, "size of packet")
-        self.assertEqual(len(packet2), correct_payload_index2 + length2 + 3, "size of packet")
+        self.assertEqual(len(packet1), correct_payload_index1 +
+                         length1 + 3, "size of packet")
+        self.assertEqual(len(packet2), correct_payload_index2 +
+                         length2 + 3, "size of packet")
         buffer = bytearray(packet1 + packet2)
         # test Parser
         parsed, consumed = vesc_packet.unframe(buffer)
@@ -148,9 +151,11 @@ class TestPacket(TestCase):
             parsed, consumed = vesc_packet.unframe(in_buffer)
             out_buffer = in_buffer[consumed:]
             self.assertEqual(parsed, None)
-            self.assertTrue(consumed > 0)   # if a packet is corrupt then at least something should be consumed
+            # if a packet is corrupt then at least something should be consumed
+            self.assertTrue(consumed > 0)
             # get correct out_cuffer (in all of these cases it is just consuming to the next valid start byte (no more no less)
-            self.assertEqual(consumed, vesc_packet.Stateless._next_possible_packet_index(in_buffer))
+            self.assertEqual(
+                consumed, vesc_packet.Stateless._next_possible_packet_index(in_buffer))
         # check that the good packet is parsed
         in_buffer = bytearray(good_packet)
         parsed, consumed = vesc_packet.unframe(in_buffer)
@@ -163,9 +168,9 @@ class TestPacket(TestCase):
         # make a good packet
         test_payload = b'Te!'
         good_packet = b'\x02\x03Te!B\x92\x03'
-        packet_to_recover = b'\x02\x04!\xe1$ 8\xbb\x03' # goal is to recover this packet
+        packet_to_recover = b'\x02\x04!\xe1$ 8\xbb\x03'  # goal is to recover this packet
         payload_to_recover = b'!\xe1$ '
-        after_goal = b'\x05\x09\x01' # mimic another corrupt packet after
+        after_goal = b'\x05\x09\x01'  # mimic another corrupt packet after
         corrupt_packets = []
         # corrupt first byte
         corrupt = b'\x01\x03Te!B\x92\x03'
@@ -173,7 +178,8 @@ class TestPacket(TestCase):
         # corrupt payload_length (to be smaller and larger)
         smaller_corrupt = b'\x02\x02Te!B\x92\x03'
         larger_corrupt = b'\x02\x04Te!B\x92\x03\x03'
-        corrupt_packets.append(smaller_corrupt + packet_to_recover + after_goal)
+        corrupt_packets.append(
+            smaller_corrupt + packet_to_recover + after_goal)
         corrupt_packets.append(larger_corrupt + packet_to_recover + after_goal)
         # corrupt first byte in payload
         corrupt = b'\x02\x03se!B\x92\x03'
@@ -194,13 +200,15 @@ class TestPacket(TestCase):
             out_buffer = in_buffer[consumed:]
             self.assertEqual(parsed, payload_to_recover)
             found_packet_start = corrupt.find(packet_to_recover)
-            self.assertTrue(consumed == (found_packet_start + len(packet_to_recover)))
+            self.assertTrue(consumed == (
+                found_packet_start + len(packet_to_recover)))
         # check that the good packet is parsed
         in_buffer = bytearray(good_packet)
         parsed, consumed = vesc_packet.unframe(in_buffer)
         out_buffer = in_buffer[consumed:]
         self.assertEqual(parsed, test_payload)
         self.assertEqual(out_buffer, b'')
+
 
 class TestMsg(TestCase):
     def setUp(self):
@@ -351,7 +359,7 @@ class TestMsg(TestCase):
         # try to fill a message with the wrong number of arguments
         caught = False
         try:
-            testmessage1 = testMsg1(2, 4, 5) # should be 2 args
+            testmessage1 = testMsg1(2, 4, 5)  # should be 2 args
         except AttributeError as e:
             caught = True
         self.assertTrue(caught)
