@@ -14,7 +14,7 @@ env:
   TAG_FILE: version.txt
   IS_RELEASE: is_release.txt
   MATRIX_VERSION_PUBLISHING: "3.10"
-  SOURCE_CODE_PATH: pyvesc/__init__.py
+  SOURCE_CODE_PATH: pyvesc_fix/__init__.py
 
 jobs:
   build:
