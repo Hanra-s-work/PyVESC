@@ -121,7 +121,7 @@ jobs:
           echo "Tag: $latest_tag"
           latest_tag=${latest_tag/"v"/""}
           echo "Tag: $latest_tag"
-          sed -i "s/VERSION='.*'/VERSION='$latest_tag'/g" ${{env.SETUP_FILE}}
+          sed -i "s/VERSION = '.*'/VERSION = '$latest_tag'/g" ${{env.SETUP_FILE}}
           sed -i "s/self.__version__ = '.*'/self.__version__ = '$latest_tag'/g" ${{env.SOURCE_CODE_PATH}}
         fi
         echo "Content: $(ls)"
